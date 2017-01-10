@@ -1,16 +1,17 @@
 #!/bin/sh
 
+# prepaws
 prefix="🐾 "
 
-repo_name2=$(git remote show origin -n | grep h.URL | sed 's/.*[:3000|:]//;s/.git$//')
+# repo_name2=$(git remote show origin -n | grep h.URL | sed 's/.*[:3000|:]//;s/.git$//')
 # > /rotblauer/paint
-remote_link=$(git remote show origin -n | grep h.URL)
+remote_link=$(git remote show origin -n | grep h.URL | sed 's/  Fetch URL: //')
 # > full url will be twt shortened to 23 chars
 message=$(git log --pretty=format:%s -n1)
 
 #25 chars
 tweet_pre="$prefix $remote_link "
-tweet_post="$repo_name2 $message"
+tweet_post="$message"
 
 # truncate tweets that are longer than 140 characters
 if [ ${#tweet_post} -gt 114 ]
