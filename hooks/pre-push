@@ -1,21 +1,24 @@
 #!/bin/sh
 
-# PATH modification needed for http_post and oauth_sign
-export PATH=$PATH:/usr/local/bin
+prefix="🐾 "
 
-toplevel_path=`git rev-parse --show-toplevel`
-toplevel_dir=`basename "$toplevel_path"`
+repo_name2=$(git remote show origin -n | grep h.URL | sed 's/.*[:3000|:]//;s/.git$//')
+# > /rotblauer/paint
+remote_link=$(git remote show origin -n | grep h.URL)
+# > full url will be twt shortened to 23 chars
+message=$(git log --pretty=format:%s -n1)
 
-branch=`git rev-parse --abbrev-ref HEAD`
-subject=`git log --pretty=format:%s -n1`
-hashtags="🐾 #$toplevel_dir"
-tweet=$hashtags' ['$branch']: "'$subject'"'
+#25 chars
+tweet_pre="$prefix $remote_link "
+tweet_post="$repo_name2 $message"
 
 # truncate tweets that are longer than 140 characters
-if [ ${#tweet} -gt 140 ]
+if [ ${#tweet_post} -gt 114 ]
     then
-        tweet_trunc=$(echo $tweet | cut -c1-137)
-        tweet=${tweet_trunc}...
+        tweet_trunc=$(echo $tweet_post | cut -c1-111)
+        tweet_post=${tweet_trunc}...
 fi
+
+tweet="$tweet_pre$tweet_post"
 
 t update "$tweet"
