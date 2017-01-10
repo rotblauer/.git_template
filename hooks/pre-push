@@ -5,7 +5,7 @@ prefix="🐾 "
 
 # repo_name2=$(git remote show origin -n | grep h.URL | sed 's/.*[:3000|:]//;s/.git$//')
 # > /rotblauer/paint
-remote_link=$(git remote show origin -n | grep h.URL | sed 's/  Fetch URL: //')
+remote_link=$(git remote show origin -n | grep h.URL | sed 's/  Fetch URL: //' | sed 's/.git$//')
 # > full url will be twt shortened to 23 chars
 message=$(git log --pretty=format:%s -n1)
 
