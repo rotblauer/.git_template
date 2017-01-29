@@ -10,7 +10,6 @@ remote_link=$(git remote show origin -n | grep h.URL | sed 's/  Fetch URL: //' |
 message=$(git log --pretty=format:%s -n1)
 
 #25 chars
-tweet_pre="$prefix $remote_link "
 tweet_post="$message"
 
 # truncate tweets that are longer than 140 characters
@@ -20,6 +19,6 @@ if [ ${#tweet_post} -gt 114 ]
         tweet_post=${tweet_trunc}...
 fi
 
-tweet="$tweet_pre$tweet_post"
+tweet="$prefix $tweet_post $remote_link"
 
 t update "$tweet"
