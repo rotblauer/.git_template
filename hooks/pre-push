@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# prepaws
+# prepawsss
 
 # repo_name2=$(git remote show origin -n | grep h.URL | sed 's/.*[:3000|:]//;s/.git$//')
 # > /rotblauer/paint
