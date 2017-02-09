@@ -15,7 +15,7 @@ twttrtrunclinklen=23 # or 25?
 
 # truncate tweets that are longer than 140 characters
 # 140 - 23(=twtter trunc linker) - hashish.len
-maxMessLen=140-${#prefix}-1-${#tweet_post}-1-${#hashish}-1-$twttrtrunclinklen
+maxMessLen=$(140-${#prefix}-1-${#tweet_post}-1-${#hashish}-1-$twttrtrunclinklen)
 
 if [ ${#tweet_post} -gt $maxMessLen ]
     then
