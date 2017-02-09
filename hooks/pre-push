@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # prepaws
-prefix="🐾 "
 
 # repo_name2=$(git remote show origin -n | grep h.URL | sed 's/.*[:3000|:]//;s/.git$//')
 # > /rotblauer/paint
@@ -9,16 +8,21 @@ remote_link=$(git remote show origin -n | grep h.URL | sed 's/  Fetch URL: //' |
 # > full url will be twt shortened to 23 chars
 message=$(git log --pretty=format:%s -n1)
 
-#25 chars
+prefix="🐾 "
 tweet_post="$message"
+hashish="#antifragile"
+twttrtrunclinklen=23 # or 25?
 
 # truncate tweets that are longer than 140 characters
-if [ ${#tweet_post} -gt 114 ]
+# 140 - 23(=twtter trunc linker) - hashish.len
+maxMessLen=140-${#prefix}-1-${#tweet_post}-1-${#hashish}-1-$twttrtrunclinklen
+
+if [ ${#tweet_post} -gt $maxMessLen ]
     then
-        tweet_trunc=$(echo $tweet_post | cut -c1-111)
+		tweet_trunc=$(echo $tweet_post | cut -c1-$maxMessLen)
         tweet_post=${tweet_trunc}...
 fi
 
-tweet="$prefix $tweet_post $remote_link"
+tweet="$prefix $tweet_post $hashish $remote_link"
 
 t update "$tweet"
