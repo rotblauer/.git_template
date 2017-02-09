@@ -12,7 +12,7 @@ prefix="🐾 "
 prefix_len=${#prefix}
 tweet_post="$message"
 tweet_post_len=${#tweet_post}
-hashish="#antifragile"
+hashish="#Antifragile"
 hashish_len=${#hashish}
 twttrtrunclinklen=23 # or 25?
 
