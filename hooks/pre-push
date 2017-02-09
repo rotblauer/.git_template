@@ -9,15 +9,18 @@ remote_link=$(git remote show origin -n | grep h.URL | sed 's/  Fetch URL: //' |
 message=$(git log --pretty=format:%s -n1)
 
 prefix="🐾 "
+prefix_len=${#prefix}
 tweet_post="$message"
+tweet_post_len=${#tweet_post}
 hashish="#antifragile"
+hashish_len=${#hashish}
 twttrtrunclinklen=23 # or 25?
 
 # truncate tweets that are longer than 140 characters
 # 140 - 23(=twtter trunc linker) - hashish.len
-maxMessLen=$(140-${#prefix}-1-${#tweet_post}-1-${#hashish}-1-$twttrtrunclinklen)
+maxMessLen=140-$prefix_len-1-$tweet_post_len-1-$hashish_len-1-$twttrtrunclinklen
 
-if [ ${#tweet_post} -gt $maxMessLen ]
+if [ $tweet_post_len -gt $maxMessLen ]
     then
 		tweet_trunc=$(echo $tweet_post | cut -c1-$maxMessLen)
         tweet_post=${tweet_trunc}...
